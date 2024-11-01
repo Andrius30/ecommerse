@@ -1,0 +1,102 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+{% include 'partials/header.html' %}
+{% include 'partials/sidebar.html' %}
+<style>
+	.status-pending {
+    color: orange;
+}
+
+.status-processing {
+    color: blue;
+}
+
+.status-inactive {
+    color: red;
+}
+
+.status-active {
+    color: green;
+}
+</style>
+<main class="wrapper sb-default">
+		<!-- Loader -->
+		<div id="cr-overlay">
+			<div class="loader"></div>
+		</div>
+
+		<!-- main content -->
+		<div class="cr-main-content">
+			<div class="container-fluid">
+				<!-- Page title & breadcrumb -->
+				<div class="cr-page-title cr-page-title-2">
+					<div class="cr-breadcrumb">
+						<h5>Product List</h5>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-md-12">
+						<div class="cr-card card-default product-list">
+							<div class="cr-card-content ">
+								<div class="table-responsive">
+									<table id="product_list" class="table" style="width:100%">
+										<thead>
+											<tr>
+												<th>Product</th>
+												<th>Name</th>
+												<th>Price</th>
+												<th>Offer</th>
+												<th>Purchased</th>
+												<th>Stock</th>
+												<th>Status</th>
+												<th>Date</th>
+												<th>Action</th>
+											</tr>
+										</thead>
+
+										<tbody>
+										{% for product in products %}
+											<tr>
+												<td><img class="tbl-thumb" src="{{ product.product_img.url }}"
+														alt="Product Image"></td>
+												<td>{{ product.name }}</td>
+												<td>{{ product.price }}</td>
+												<td>{{ product.discount }}% OFF</td>
+												<td>{{ product.purchased }}</td>
+												<td>{{ product.stock }}</td>
+												<td><div class="status-label {% if product.status == 'PENDING' %}status-pending{% elif product.status == 'PROCESSING' %}
+												status-processing{% elif product.status == 'INACTIVE' %}status-inactive{% elif product.status == 'ACTIVE' %}status-active{% endif %}">
+													{{ product.get_status_display }}</div></td>
+												<td>{{ product.date_added|date:'Y.m.d'  }}</td>
+												<td>
+													<div class="d-flex justify-content-center">
+														<button type="button"
+															class="btn btn-outline-success dropdown-toggle dropdown-toggle-split"
+															data-bs-toggle="dropdown" aria-haspopup="true"
+															aria-expanded="false" data-display="static">
+															<span class="sr-only"><i
+																	class="ri-settings-3-line"></i></span>
+														</button>
+														<div class="dropdown-menu">
+															        <a href="{% url 'products:product_edit' product.id %}">Edit</a>
+															<a class="dropdown-item delete-btn" data-product-id="{{ product.id }}">Delete</a>
+														</div>
+													</div>
+												</td>
+											</tr>
+										{% endfor %}
+										</tbody>
+									</table>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		{% include 'partials/footer.html' %}
+		{% include 'partials/feature_tools.html' %}
+	</main>
+{% endblock %}
