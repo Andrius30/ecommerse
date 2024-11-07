@@ -1,0 +1,159 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+
+<main class="wrapper sb-default">
+		<!-- Loader -->
+		<div id="cr-overlay">
+			<div class="loader"></div>
+		</div>
+
+    {% include 'partials/header.html' %}
+    {% include 'partials/sidebar.html' %}
+
+		<!-- main content -->
+		<div class="cr-main-content">
+			<div class="container-fluid">
+				<!-- Page title & breadcrumb -->
+				<div class="cr-page-title cr-page-title-2">
+					<div class="cr-breadcrumb">
+						<h5>Category</h5>
+						<ul>
+							<li><a href="/">Carrot</a></li>
+							<li>Category</li>
+						</ul>
+					</div>
+				</div>
+				<div class="row cr-category">
+					<div class="col-xl-4 col-lg-12">
+						<div class="team-sticky-bar">
+							<div class="col-md-12">
+								<div class="cr-cat-list cr-card card-default mb-24px">
+									<div class="cr-card-content">
+										<div class="cr-cat-form">
+											<h3>Add New Category</h3>
+
+											<form method="POST" action="{% url 'products:add_category' %}">
+                                                {% csrf_token %}
+												<div class="form-group">
+													<label>Name</label>
+													<div class="col-12">
+														<input id="text" name="text"
+															class="form-control" type="text">
+													</div>
+												</div>
+
+												<div class="form-group">
+													<label>Slug</label>
+													<div class="col-12">
+														<input id="slug" name="slug" class="form-control"
+															type="text">
+													</div>
+												</div>
+
+												<div class="form-group row">
+													<label>Short Description</label>
+													<div class="col-12">
+														<textarea id="sortdescription" name="sortdescription" cols="40"
+															rows="2" class="form-control"></textarea>
+													</div>
+												</div>
+
+												<div class="form-group row">
+													<label>Full Description</label>
+													<div class="col-12">
+														<textarea id="fulldescription" name="fulldescription" cols="40"
+															rows="4" class="form-control"></textarea>
+													</div>
+												</div>
+
+												<div class="form-group row">
+													<label>Product Tags <span>( Type and
+															make comma to separate tags )</span></label>
+													<div class="col-12">
+														<input type="text" class="form-control" id="group_tag"
+															name="group_tag" value="" placeholder=""
+															data-role="tagsinput">
+													</div>
+												</div>
+
+												<div class="row">
+													<div class="col-12 d-flex">
+														<button type="submit" class="cr-btn-primary">Submit</button>
+													</div>
+												</div>
+
+											</form>
+
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="col-xl-8 col-lg-12">
+						<div class="cr-cat-list cr-card card-default">
+							<div class="cr-card-content ">
+								<div class="table-responsive tbl-800">
+									<table id="cat_data_table" class="table">
+										<thead>
+											<tr>
+												<th>Name</th>
+												<th>Sub Categories</th>
+												<th>Product</th>
+												<th>Status</th>
+												<th>Trending</th>
+												<th>Action</th>
+											</tr>
+										</thead>
+
+										<tbody>
+                                        {% for category in product_category %}
+											<tr>
+												<td>{{ category.name }}</td>
+												<td>
+													<span class="cr-sub-cat-list">
+														<span class="cr-sub-cat-count"
+															title="Total Sub Categories">5</span>
+														<span class="cr-sub-cat-tag">T-shirt</span>
+														<span class="cr-sub-cat-tag">Shirt</span>
+														<span class="cr-sub-cat-tag">Dress</span>
+														<span class="cr-sub-cat-tag">Jeans</span>
+														<span class="cr-sub-cat-tag">Top</span>
+													</span>
+												</td>
+												<td>28</td>
+												<td class="active">ACTIVE</td>
+												<td><span class="badge badge-success">Top</span></td>
+												<td>
+													<div>
+														<button type="button"
+															class="btn btn-outline-success dropdown-toggle dropdown-toggle-split"
+															data-bs-toggle="dropdown" aria-haspopup="true"
+															aria-expanded="false" data-display="static">
+															<span class="sr-only"><i
+																	class="ri-settings-3-line"></i></span>
+														</button>
+
+														<div class="dropdown-menu">
+															<a class="dropdown-item" href="#">Edit</a>
+															<a class="dropdown-item" href="#">Delete</a>
+														</div>
+													</div>
+												</td>
+											</tr>
+											{% endfor %}
+										</tbody>
+									</table>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+
+    {% include 'partials/footer.html' %}
+    {% include 'partials/feature_tools.html' %}
+
+{% endblock %}

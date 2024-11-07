@@ -1,8 +1,10 @@
 {% extends 'base.html' %}
 {% load static %}
 {% block content %}
+{% load custom_filters %}
 
-	<!-- Loader -->
+
+    <!-- Loader -->
 		<div id="cr-overlay">
 			<div class="loader"></div>
 		</div>
@@ -21,7 +23,7 @@
 					<div class="cr-breadcrumb">
 						<h5>eCommerce</h5>
 						<ul>
-							<li><a href="index.html">Carrot</a></li>
+							<li><a href="/">Carrot</a></li>
 							<li>eCommerce</li>
 						</ul>
 					</div>
@@ -216,84 +218,84 @@
 											</thead>
 											<tbody>
 												<tr>
-													<td><img class="cat-thumb" src="assets/img/clients/1.jpg"
+													<td><img class="cat-thumb" src="{% static 'assets/img/clients/1.jpg' %}"
 															alt="clients Image"><span class="name">DS Fashion</span>
 													</td>
 													<td>
 														<span class="cat">
-															<a href="product-list.html">Watches</a>
-															<a href="product-list.html">Clothes</a>
-															<a href="product-list.html">Phones</a>
+															<a href="{% url 'products:products_list' %}">Watches</a>
+															<a href="{% url 'products:products_list' %}">Clothes</a>
+															<a href="{% url 'products:products_list' %}">Phones</a>
 														</span>
 													</td>
 													<td>685</td>
 													<td>$1254</td>
 												</tr>
 												<tr>
-													<td><img class="cat-thumb" src="assets/img/clients/2.jpg"
+													<td><img class="cat-thumb" src="{% static 'assets/img/clients/2.jpg' %}"
 															alt="clients Image"><span class="name">Loka Creation</span>
 													</td>
 													<td>
 														<span class="cat">
-															<a href="product-list.html">Phone</a>
-															<a href="product-list.html">Camera</a>
-															<a href="product-list.html">Clothes</a>
-															<a href="product-list.html">Phones</a>
+															<a href="{% url 'products:products_list' %}">Phone</a>
+															<a href="{% url 'products:products_list' %}">Camera</a>
+															<a href="{% url 'products:products_list' %}">Clothes</a>
+															<a href="{% url 'products:products_list' %}">Phones</a>
 														</span>
 													</td>
 													<td>874</td>
 													<td>$1768</td>
 												</tr>
 												<tr>
-													<td><img class="cat-thumb" src="assets/img/clients/3.jpg"
+													<td><img class="cat-thumb" src="{% static 'assets/img/clients/3.jpg' %}"
 															alt="clients Image"><span class="name">Vorna Arts</span>
 													</td>
 													<td>
 														<span class="cat">
-															<a href="product-list.html">Laptop</a>
-															<a href="product-list.html">Furniture</a>
-															<a href="product-list.html">Phones</a>
+															<a href="{% url 'products:products_list' %}">Laptop</a>
+															<a href="{% url 'products:products_list' %}">Furniture</a>
+															<a href="{% url 'products:products_list' %}">Phones</a>
 														</span>
 													</td>
 													<td>95</td>
 													<td>$2296</td>
 												</tr>
 												<tr>
-													<td><img class="cat-thumb" src="assets/img/clients/4.jpg"
+													<td><img class="cat-thumb" src="{% static 'assets/img/clients/4.jpg' %}"
 															alt="clients Image"><span class="name">Lestie Shop</span>
 													</td>
 													<td>
 														<span class="cat">
-															<a href="product-list.html">Clothes</a>
-															<a href="product-list.html">Phones</a>
+															<a href="{% url 'products:products_list' %}">Clothes</a>
+															<a href="{% url 'products:products_list' %}">Phones</a>
 														</span>
 													</td>
 													<td>354</td>
 													<td>$2754</td>
 												</tr>
 												<tr>
-													<td><img class="cat-thumb" src="assets/img/clients/5.jpg"
+													<td><img class="cat-thumb" src="{% static 'assets/img/clients/5.jpg' %}"
 															alt="clients Image"><span class="name">Moris Gallery</span>
 													</td>
 													<td>
 														<span class="cat">
-															<a href="product-list.html">Tools</a>
-															<a href="product-list.html">Clothes</a>
-															<a href="product-list.html">Bags</a>
+															<a href="{% url 'products:products_list' %}">Tools</a>
+															<a href="{% url 'products:products_list' %}">Clothes</a>
+															<a href="{% url 'products:products_list' %}">Bags</a>
 														</span>
 													</td>
 													<td>675</td>
 													<td>$3105</td>
 												</tr>
 												<tr>
-													<td><img class="cat-thumb" src="assets/img/clients/6.jpg"
+													<td><img class="cat-thumb" src="{% static 'assets/img/clients/6.jpg' %}"
 															alt="clients Image"><span class="name">Jens Fashion.</span>
 													</td>
 													<td>
 														<span class="cat">
-															<a href="product-list.html">Shoes</a>
-															<a href="product-list.html">Clothes</a>
-															<a href="product-list.html">Jewellery</a>
+															<a href="{% url 'products:products_list' %}">Shoes</a>
+															<a href="{% url 'products:products_list' %}">Clothes</a>
+															<a href="{% url 'products:products_list' %}">Jewellery</a>
 														</span>
 													</td>
 													<td>854</td>
@@ -332,60 +334,17 @@
 												</tr>
 											</thead>
 											<tbody>
+                                            {% for product in products %}
 												<tr>
-													<td><img class="cat-thumb" src="assets/img/product/1.jpg"
-															alt="clients Image"><span class="name">Mens t-shirt</span>
+													<td><img class="cat-thumb" src="{{ product.product_img.url }}"
+															alt="clients Image"><span class="name">{{ product.name }}</span>
 													</td>
-													<td>$16</td>
-													<td>162</td>
-													<td>456</td>
-													<td>$3524</td>
+													<td>{{ product.price }}</td>
+													<td>{{ product.purchased }}</td>
+													<td>{{ product.stock }}</td>
+													<td>€{{ product.purchased|multiply:product.price }}</td>
 												</tr>
-												<tr>
-													<td><img class="cat-thumb" src="assets/img/product/2.jpg"
-															alt="clients Image"><span class="name">Sofa chair</span>
-													</td>
-													<td>$52</td>
-													<td>178</td>
-													<td>958</td>
-													<td>$8654</td>
-												</tr>
-												<tr>
-													<td><img class="cat-thumb" src="assets/img/product/3.jpg"
-															alt="clients Image"><span class="name">Night Lamp</span>
-													</td>
-													<td>$70</td>
-													<td>198</td>
-													<td>1524</td>
-													<td>$1152</td>
-												</tr>
-												<tr>
-													<td><img class="cat-thumb" src="assets/img/product/4.jpg"
-															alt="clients Image"><span class="name">Mens hoodie</span>
-													</td>
-													<td>$16</td>
-													<td>205</td>
-													<td>253</td>
-													<td>$5645</td>
-												</tr>
-												<tr>
-													<td><img class="cat-thumb" src="assets/img/product/5.jpg"
-															alt="clients Image"><span class="name">Digital Watch</span>
-													</td>
-													<td>$559</td>
-													<td>209</td>
-													<td>456</td>
-													<td>$20546</td>
-												</tr>
-												<tr>
-													<td><img class="cat-thumb" src="assets/img/product/6.jpg"
-															alt="clients Image"><span class="name">DSLR Camera.</span>
-													</td>
-													<td>$1546</td>
-													<td>212</td>
-													<td>98</td>
-													<td>$33500</td>
-												</tr>
+                                            {% endfor %}
 											</tbody>
 										</table>
 									</div>
@@ -424,7 +383,7 @@
 											<tbody>
 												<tr>
 													<td class="token">#fx2650</td>
-													<td><img class="cat-thumb" src="assets/img/product/1.jpg"
+													<td><img class="cat-thumb" src="{% static 'assets/img/product/1.jpg' %}"
 															alt="clients Image"><span class="name">Mens t-shirt</span>
 													</td>
 													<td>Avira Venusio</td>
@@ -434,7 +393,7 @@
 												</tr>
 												<tr>
 													<td class="token">#fx2650</td>
-													<td><img class="cat-thumb" src="assets/img/product/2.jpg"
+													<td><img class="cat-thumb" src="{% static 'assets/img/product/2.jpg' %}"
 															alt="clients Image"><span class="name">Sofa chair</span>
 													</td>
 													<td>Zara nails</td>
@@ -444,7 +403,7 @@
 												</tr>
 												<tr>
 													<td class="token">#fx2365</td>
-													<td><img class="cat-thumb" src="assets/img/product/3.jpg"
+													<td><img class="cat-thumb" src="{% static 'assets/img/product/3.jpg' %}"
 															alt="clients Image"><span class="name">Night Lamp</span>
 													</td>
 													<td>Olive Yew</td>
@@ -454,7 +413,7 @@
 												</tr>
 												<tr>
 													<td class="token">#fx2205</td>
-													<td><img class="cat-thumb" src="assets/img/product/4.jpg"
+													<td><img class="cat-thumb" src="{% static 'assets/img/product/4.jpg' %}"
 															alt="clients Image"><span class="name">Mens hoodie</span>
 													</td>
 													<td>Allie Grater</td>
@@ -464,7 +423,7 @@
 												</tr>
 												<tr>
 													<td class="token">#fx2187</td>
-													<td><img class="cat-thumb" src="assets/img/product/5.jpg"
+													<td><img class="cat-thumb" src="{% static 'assets/img/product/5.jpg' %}"
 															alt="clients Image"><span class="name">Digital Watch</span>
 													</td>
 													<td>Stanley Knife</td>
@@ -474,7 +433,7 @@
 												</tr>
 												<tr>
 													<td class="token">#fx2050</td>
-													<td><img class="cat-thumb" src="assets/img/product/6.jpg"
+													<td><img class="cat-thumb" src="{% static 'assets/img/product/6.jpg' %}"
 															alt="clients Image"><span class="name">DSLR Camera.</span>
 													</td>
 													<td>Nick Carlet</td>
@@ -484,7 +443,7 @@
 												</tr>
 												<tr>
 													<td class="token">#fx1995</td>
-													<td><img class="cat-thumb" src="assets/img/product/7.jpg"
+													<td><img class="cat-thumb" src="{% static 'assets/img/product/7.jpg' %}"
 															alt="clients Image"><span class="name">Head phone</span>
 													</td>
 													<td>Moris Nency</td>
@@ -494,7 +453,7 @@
 												</tr>
 												<tr>
 													<td class="token">#fx1985</td>
-													<td><img class="cat-thumb" src="assets/img/product/8.jpg"
+													<td><img class="cat-thumb" src="{% static 'assets/img/product/8.jpg' %}"
 															alt="clients Image"><span class="name">Camera Dron</span>
 													</td>
 													<td>Wiley Waites</td>
@@ -504,7 +463,7 @@
 												</tr>
 												<tr>
 													<td class="token">#fx1945</td>
-													<td><img class="cat-thumb" src="assets/img/product/9.jpg"
+													<td><img class="cat-thumb" src="{% static 'assets/img/product/9.jpg' %}"
 															alt="clients Image"><span class="name">Drill machine</span>
 													</td>
 													<td>Sarah Moanees</td>
@@ -514,7 +473,7 @@
 												</tr>
 												<tr>
 													<td class="token">#fx1865</td>
-													<td><img class="cat-thumb" src="assets/img/product/10.jpg"
+													<td><img class="cat-thumb" src="{% static 'assets/img/product/10.jpg' %}"
 															alt="clients Image"><span class="name">Camera Dron</span>
 													</td>
 													<td>Anne Ortha</td>

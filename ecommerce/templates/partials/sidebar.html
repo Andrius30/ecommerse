@@ -18,11 +18,11 @@
 							<ul class="cr-sb-drop condense">
 								<li><a href="/" class="cr-page-link drop"><i
 									class="ri-checkbox-blank-circle-line"></i>ecommerce</a></li>
-								<li><a href="product-list.html" class="cr-page-link drop"><i
+								<li><a href="{%  url 'products:products_list' %}" class="cr-page-link drop"><i
 											class="ri-checkbox-blank-circle-line"></i>Product list</a></li>
 								<li><a href="add-product.html" class="cr-page-link drop"><i
 											class="ri-checkbox-blank-circle-line"></i>Add Product</a></li>
-								<li><a href="add-category.html" class="cr-page-link drop"><i
+								<li><a href="{% url 'products:add_category' %}" class="cr-page-link drop"><i
 											class="ri-checkbox-blank-circle-line"></i>Add Category</a></li>
 								<li><a href="add-sub-category.html" class="cr-page-link drop"><i
 											class="ri-checkbox-blank-circle-line"></i>Add Sub Category</a></li>
@@ -46,49 +46,6 @@
 							</ul>
 						</li>
 						<li class="cr-sb-item-separator"></li>
-						<li class="cr-sb-title condense">Pages</li>
-						<li class="cr-sb-item sb-drop-item">
-							<a href="javascript:void(0)" class="cr-drop-toggle">
-								<i class="ri-pages-line"></i><span class="condense">Authentication<i
-										class="drop-arrow ri-arrow-down-s-line"></i></span></a>
-						</li>
-						<li class="cr-sb-item-separator"></li>
-						<li class="cr-sb-title condense">Elements</li>
-						<li class="cr-sb-item">
-							<a href="remix-icons.html" class="cr-page-link">
-								<i class="ri-remixicon-line"></i><span class="condense"><span class="hover-title">remix
-										icons</span></span></a>
-						</li>
-						<li class="cr-sb-item">
-							<a href="material-icons.html" class="cr-page-link">
-								<i class="mdi mdi-material-ui"></i><span class="condense"><span
-										class="hover-title">Material icons</span></span></a>
-						</li>
-						<li class="cr-sb-item">
-							<a href="apexchart.html" class="cr-page-link">
-								<i class="ri-bar-chart-grouped-line"></i><span class="condense"><span
-										class="hover-title">Apexcharts</span></span></a>
-						</li>
-						<li class="cr-sb-item">
-							<a href="buttons.html" class="cr-page-link">
-								<i class="ri-radio-button-line"></i><span class="condense"><span
-										class="hover-title">Buttons</span></span></a>
-						</li>
-						<li class="cr-sb-item">
-							<a href="accordions.html" class="cr-page-link">
-								<i class="ri-play-list-add-line"></i><span class="condense"><span
-										class="hover-title">Accordions</span></span></a>
-						</li>
-						<li class="cr-sb-item">
-							<a href="typography.html" class="cr-page-link">
-								<i class="ri-file-text-line"></i><span class="condense"><span
-										class="hover-title">Typography</span></span></a>
-						</li>
-						<li class="cr-sb-item">
-							<a href="alert-popup.html" class="cr-page-link">
-								<i class="ri-file-warning-line"></i><span class="condense"><span
-										class="hover-title">Alert Popup</span></span></a>
-						</li>
 					</ul>
 				</div>
 			</div>
@@ -193,7 +150,7 @@
 								<li>
 									<a href="chatapp.html" class="reply">Reply</a>
 									<div class="user">
-										<img src="assets/img/user/9.jpg" alt="user">
+										<img src="{% static 'assets/img/user/9.jpg' %}" alt="user">
 										<span class="label online"></span>
 									</div>
 									<div class="detail">
@@ -203,11 +160,11 @@
 											page. And make sure this all files are comppress.</p>
 										<span class="download-files">
 											<span class="download">
-												<img src="assets/img/other/1.jpg" alt="image">
+												<img src="{% static 'assets/img/other/1.jpg' %}" alt="image">
 												<a href="javascript:void(0)"><i class="ri-download-2-line"></i></a>
 											</span>
 											<span class="download">
-												<img src="assets/img/other/2.jpg" alt="image">
+												<img src="{% static 'assets/img/other/2.jpg' %}" alt="image">
 												<a href="javascript:void(0)"><i class="ri-download-2-line"></i></a>
 											</span>
 											<span class="download">
@@ -222,7 +179,7 @@
 								<li>
 									<a href="chatapp.html" class="reply">Reply</a>
 									<div class="user">
-										<img src="assets/img/user/8.jpg" alt="user">
+										<img src="{% static 'assets/img/user/8.jpg' %}" alt="user">
 										<span class="label offline"></span>
 									</div>
 									<div class="detail">
@@ -235,7 +192,7 @@
 								<li>
 									<a href="chatapp.html" class="reply">Reply</a>
 									<div class="user">
-										<img src="assets/img/user/7.jpg" alt="user">
+										<img src="{% static 'assets/img/user/7.jpg' %}" alt="user">
 										<span class="label busy"></span>
 									</div>
 									<div class="detail">
@@ -268,7 +225,7 @@
 								<li>
 									<a href="chatapp.html" class="reply">Reply</a>
 									<div class="user">
-										<img src="assets/img/user/6.jpg" alt="user">
+										<img src="{% static 'assets/img/user/6.jpg' %}" alt="user">
 										<span class="label busy"></span>
 									</div>
 									<div class="detail">
@@ -281,7 +238,7 @@
 								<li>
 									<a href="chatapp.html" class="reply">Reply</a>
 									<div class="user">
-										<img src="assets/img/user/5.jpg" alt="user">
+										<img src="{% static 'assets/img/user/5.jpg' %}" alt="user">
 										<span class="label busy"></span>
 									</div>
 									<div class="detail">
@@ -305,11 +262,11 @@
 										lorem is typesetting industry.</p>
 									<span class="download-files">
 										<span class="download">
-											<img src="assets/img/other/1.jpg" alt="image">
+											<img src="{% static 'assets/img/other/1.jpg' %}" alt="image">
 											<a href="javascript:void(0)"><i class="ri-download-2-line"></i></a>
 										</span>
 										<span class="download">
-											<img src="assets/img/other/2.jpg" alt="image">
+											<img src="{% static 'assets/img/other/2.jpg' %}" alt="image">
 											<a href="javascript:void(0)"><i class="ri-download-2-line"></i></a>
 										</span>
 										<span class="download">
@@ -339,7 +296,7 @@
 											<a href="javascript:void(0)"><i class="ri-download-2-line"></i></a>
 										</span>
 										<span class="download">
-											<img src="assets/img/other/3.jpg" alt="image">
+											<img src="{% static 'assets/img/other/3.jpg' %}" alt="image">
 											<a href="javascript:void(0)"><i class="ri-download-2-line"></i></a>
 										</span>
 									</span>

@@ -68,7 +68,7 @@
 												<td><div class="status-label {% if product.status == 'PENDING' %}status-pending{% elif product.status == 'PROCESSING' %}
 												status-processing{% elif product.status == 'INACTIVE' %}status-inactive{% elif product.status == 'ACTIVE' %}status-active{% endif %}">
 													{{ product.get_status_display }}</div></td>
-												<td>{{ product.date_added|date:'Y.m.d'  }}</td>
+												<td>{{ product.date_added|date:'Y.m.d' }}</td>
 												<td>
 													<div class="d-flex justify-content-center">
 														<button type="button"
@@ -79,8 +79,8 @@
 																	class="ri-settings-3-line"></i></span>
 														</button>
 														<div class="dropdown-menu">
-															        <a href="{% url 'products:product_edit' product.id %}">Edit</a>
-															<a class="dropdown-item delete-btn" data-product-id="{{ product.id }}">Delete</a>
+                                                            <a class="dropdown-item edit-btn" href="{% url 'products:product_edit' product.id %}">Edit</a>
+															<a class="dropdown-item delete-btn" href="{% url 'products:product_delete' product.id %}">Delete</a>
 														</div>
 													</div>
 												</td>
@@ -96,7 +96,7 @@
 			</div>
 		</div>
 
-		{% include 'partials/footer.html' %}
+	    {% include 'partials/footer.html' %}
 		{% include 'partials/feature_tools.html' %}
 	</main>
 {% endblock %}
