@@ -10,6 +10,12 @@ class Category(models.Model):
     short_description = models.TextField(blank=True, null=True)
     full_description = models.TextField(blank=True, null=True)
     group_tag = models.CharField(max_length=200, blank=True, null=True)
+    parent_category = models.ForeignKey(
+        'self',
+        null=True,
+        blank=True,
+        on_delete=models.SET_NULL,
+        related_name='subcategories')
 
     def __str__(self):
         return self.name

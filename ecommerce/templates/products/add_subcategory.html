@@ -32,17 +32,16 @@
 									<div class="cr-card-content">
 										<div class="cr-cat-form">
 											<h3>Add Sub Category</h3>
-											<form method="POST">
+											<form method="POST" action="{% url 'products:add_subcategory' %}">
+                                             {% csrf_token %}
 												<div class="form-group">
 													<label>Name</label>
 													<div class="col-12">
-														<select class="form-control form-select">
+														<select name="parent_category" id="parent_category" class="form-control form-select">
 															<option>Select Main Category</option>
-															<option>Clothes</option>
-															<option>Jewellery</option>
-															<option>Furniture</option>
-															<option>Perfume</option>
-															<option>Footwear</option>
+                                                            {% for category in product_category %}
+                                                            <option value="{{ category.id }}">{{ category.name }}</option>
+															{% endfor %}
 														</select>
 													</div>
 												</div>
@@ -114,14 +113,20 @@
 										</thead>
 
 										<tbody>
+                                        {% for category in product_category %}
+                                        {% for subcategory in category.subcategories.all %}
 											<tr>
-												<td>T-shirt</td>
+												<td>{{ subcategory.name }}</td>
 												<td>
 													<span class="cr-sub-cat-list">
-														<span class="cr-sub-cat-tag">Clothes</span>
+														<span class="cr-sub-cat-tag" value="{{ subcategory.parent_category_id }}">{{ subcategory.parent_category.name }}</span>
 													</span>
 												</td>
-												<td>28</td>
+                                                {% if category.product > 0 %}
+												<td>{{ category.product.count }}</td>
+                                                {% else %}
+                                                <td>0</td>
+                                                {% endif %}
 												<td class="active">ACTIVE</td>
 												<td><span class="badge badge-success">Top</span></td>
 												<td>
@@ -137,261 +142,8 @@
 													</div>
 												</td>
 											</tr>
-											<tr>
-												<td>Sport shoes</td>
-												<td>
-													<span class="cr-sub-cat-list">
-														<span class="cr-sub-cat-tag">Footwear</span>
-													</span>
-												</td>
-												<td>68</td>
-												<td class="active">ACTIVE</td>
-												<td><span class="badge bg-primary">Medium</span></td>
-												<td>
-													<div>
-														<button type="button" class="btn btn-outline-success dropdown-toggle dropdown-toggle-split" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" data-display="static">
-															<span class="sr-only"><i class="ri-settings-3-line"></i></span>
-														</button>
-
-														<div class="dropdown-menu">
-															<a class="dropdown-item" href="#">Edit</a>
-															<a class="dropdown-item" href="#">Delete</a>
-														</div>
-													</div>
-												</td>
-											</tr>
-											<tr>
-												<td>Gold ring</td>
-												<td>
-													<span class="cr-sub-cat-list">
-														<span class="cr-sub-cat-tag">Jewelry</span>
-													</span>
-												</td>
-												<td>68</td>
-												<td><span class="disable">Inactive</span></td>
-												<td><span class="badge badge-success">Top</span></td>
-												<td>
-													<div>
-														<button type="button" class="btn btn-outline-success dropdown-toggle dropdown-toggle-split" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" data-display="static">
-															<span class="sr-only"><i class="ri-settings-3-line"></i></span>
-														</button>
-
-														<div class="dropdown-menu">
-															<a class="dropdown-item" href="#">Edit</a>
-															<a class="dropdown-item" href="#">Delete</a>
-														</div>
-													</div>
-												</td>
-											</tr>
-											<tr>
-												<td>Fogy deo</td>
-												<td>
-													<span class="cr-sub-cat-list">
-														<span class="cr-sub-cat-tag">Perfume</span>
-													</span>
-												</td>
-												<td>38</td>
-												<td class="active">ACTIVE</td>
-												<td><span class="badge bg-primary">Medium</span></td>
-												<td>
-													<div>
-														<button type="button" class="btn btn-outline-success dropdown-toggle dropdown-toggle-split" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" data-display="static">
-															<span class="sr-only"><i class="ri-settings-3-line"></i></span>
-														</button>
-
-														<div class="dropdown-menu">
-															<a class="dropdown-item" href="#">Edit</a>
-															<a class="dropdown-item" href="#">Delete</a>
-														</div>
-													</div>
-												</td>
-											</tr>
-											<tr>
-												<td>Facewash</td>
-												<td>
-													<span class="cr-sub-cat-list">
-														<span class="cr-sub-cat-tag">Cosmetics</span>
-													</span>
-												</td>
-												<td>18</td>
-												<td class="active">ACTIVE</td>
-												<td><span class="badge bg-danger">Low</span></td>
-												<td>
-													<div>
-														<button type="button" class="btn btn-outline-success dropdown-toggle dropdown-toggle-split" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" data-display="static">
-															<span class="sr-only"><i class="ri-settings-3-line"></i></span>
-														</button>
-
-														<div class="dropdown-menu">
-															<a class="dropdown-item" href="#">Edit</a>
-															<a class="dropdown-item" href="#">Delete</a>
-														</div>
-													</div>
-												</td>
-											</tr>
-											<tr>
-												<td>Sun Glasses</td>
-												<td>
-													<span class="cr-sub-cat-list">
-														<span class="cr-sub-cat-tag">Glasses</span>
-													</span>
-												</td>
-												<td>82</td>
-												<td><span class="inactive">Inactive</span></td>
-												<td><span class="badge bg-primary">Medium</span></td>
-												<td>
-													<div>
-														<button type="button" class="btn btn-outline-success dropdown-toggle dropdown-toggle-split" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" data-display="static">
-															<span class="sr-only"><i class="ri-settings-3-line"></i></span>
-														</button>
-
-														<div class="dropdown-menu">
-															<a class="dropdown-item" href="#">Edit</a>
-															<a class="dropdown-item" href="#">Delete</a>
-														</div>
-													</div>
-												</td>
-											</tr>
-											<tr>
-												<td>Hand Bags</td>
-												<td>
-													<span class="cr-sub-cat-list">
-														<span class="cr-sub-cat-tag">Bags</span>
-													</span>
-												</td>
-												<td>18</td>
-												<td class="active">ACTIVE</td>
-												<td><span class="badge badge-success">Top</span></td>
-												<td>
-													<div>
-														<button type="button" class="btn btn-outline-success dropdown-toggle dropdown-toggle-split" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" data-display="static">
-															<span class="sr-only"><i class="ri-settings-3-line"></i></span>
-														</button>
-
-														<div class="dropdown-menu">
-															<a class="dropdown-item" href="#">Edit</a>
-															<a class="dropdown-item" href="#">Delete</a>
-														</div>
-													</div>
-												</td>
-											</tr>
-											<tr>
-												<td>Drilling machine</td>
-												<td>
-													<span class="cr-sub-cat-list">
-														<span class="cr-sub-cat-tag">Tools</span>
-														<span class="cr-sub-cat-tag">Electrics</span>
-													</span>
-												</td>
-												<td>68</td>
-												<td class="active">ACTIVE</td>
-												<td><span class="badge bg-primary">Medium</span></td>
-												<td>
-													<div>
-														<button type="button" class="btn btn-outline-success dropdown-toggle dropdown-toggle-split" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" data-display="static">
-															<span class="sr-only"><i class="ri-settings-3-line"></i></span>
-														</button>
-
-														<div class="dropdown-menu">
-															<a class="dropdown-item" href="#">Edit</a>
-															<a class="dropdown-item" href="#">Delete</a>
-														</div>
-													</div>
-												</td>
-											</tr>
-											<tr>
-												<td>Smart watches</td>
-												<td>
-													<span class="cr-sub-cat-list">
-														<span class="cr-sub-cat-tag">Digital</span>
-													</span>
-												</td>
-												<td>48</td>
-												<td><span class="inactive">Inactive</span></td>
-												<td><span class="badge badge-success">Top</span></td>
-												<td>
-													<div>
-														<button type="button" class="btn btn-outline-success dropdown-toggle dropdown-toggle-split" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" data-display="static">
-															<span class="sr-only"><i class="ri-settings-3-line"></i></span>
-														</button>
-
-														<div class="dropdown-menu">
-															<a class="dropdown-item" href="#">Edit</a>
-															<a class="dropdown-item" href="#">Delete</a>
-														</div>
-													</div>
-												</td>
-											</tr>
-											<tr>
-												<td>Cooler</td>
-												<td>
-													<span class="cr-sub-cat-list">
-														<span class="cr-sub-cat-tag">Electrics</span>
-													</span>
-												</td>
-												<td>28</td>
-												<td class="active">ACTIVE</td>
-												<td><span class="badge bg-primary">Medium</span></td>
-												<td>
-													<div>
-														<button type="button" class="btn btn-outline-success dropdown-toggle dropdown-toggle-split" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" data-display="static">
-															<span class="sr-only"><i class="ri-settings-3-line"></i></span>
-														</button>
-
-														<div class="dropdown-menu">
-															<a class="dropdown-item" href="#">Edit</a>
-															<a class="dropdown-item" href="#">Delete</a>
-														</div>
-													</div>
-												</td>
-											</tr>
-											<tr>
-												<td>Lenovo</td>
-												<td>
-													<span class="cr-sub-cat-list">
-														<span class="cr-sub-cat-tag">Computers</span>
-														<span class="cr-sub-cat-tag">Digital</span>
-													</span>
-												</td>
-												<td>65</td>
-												<td class="active">ACTIVE</td>
-												<td><span class="badge bg-primary">Medium</span></td>
-												<td>
-													<div>
-														<button type="button" class="btn btn-outline-success dropdown-toggle dropdown-toggle-split" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" data-display="static">
-															<span class="sr-only"><i class="ri-settings-3-line"></i></span>
-														</button>
-
-														<div class="dropdown-menu">
-															<a class="dropdown-item" href="#">Edit</a>
-															<a class="dropdown-item" href="#">Delete</a>
-														</div>
-													</div>
-												</td>
-											</tr>
-											<tr>
-												<td>Sofa seat</td>
-												<td>
-													<span class="cr-sub-cat-list">
-														<span class="cr-sub-cat-tag">Furniture</span>
-													</span>
-												</td>
-												<td>48</td>
-												<td class="active">ACTIVE</td>
-												<td><span class="badge bg-primary">Medium</span></td>
-												<td>
-													<div>
-														<button type="button" class="btn btn-outline-success dropdown-toggle dropdown-toggle-split" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" data-display="static">
-															<span class="sr-only"><i class="ri-settings-3-line"></i></span>
-														</button>
-
-														<div class="dropdown-menu">
-															<a class="dropdown-item" href="#">Edit</a>
-															<a class="dropdown-item" href="#">Delete</a>
-														</div>
-													</div>
-												</td>
-											</tr>
+                                        {% endfor %}
+                                        {% endfor %}
 										</tbody>
 									</table>
 								</div>

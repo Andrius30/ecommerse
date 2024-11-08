@@ -114,12 +114,10 @@
 												<td>
 													<span class="cr-sub-cat-list">
 														<span class="cr-sub-cat-count"
-															title="Total Sub Categories">5</span>
-														<span class="cr-sub-cat-tag">T-shirt</span>
-														<span class="cr-sub-cat-tag">Shirt</span>
-														<span class="cr-sub-cat-tag">Dress</span>
-														<span class="cr-sub-cat-tag">Jeans</span>
-														<span class="cr-sub-cat-tag">Top</span>
+															title="Total Sub Categories">{{ category_subcategories.count }}</span>
+													{% for subcategory in category.subcategories.all %}
+														<span class="cr-sub-cat-tag">{{ subcategory.name }}</span>
+													{% endfor %}
 													</span>
 												</td>
 												<td>28</td>
