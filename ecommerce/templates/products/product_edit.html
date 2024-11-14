@@ -24,6 +24,7 @@
         </div>
 
 		<form class="row g-3" method="POST" action="{% url 'products:product_edit' product.id %}" enctype="multipart/form-data">
+        {{ form.errors }}
           {% csrf_token %}
         <div class="row">
             <div class="col-md-12">

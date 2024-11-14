@@ -3,7 +3,9 @@ from django.urls import reverse_lazy
 from django.views.generic import CreateView, UpdateView, DeleteView, ListView, DetailView
 from .models import Product, Category
 from django.db.models import Count
-
+from django.shortcuts import render, redirect
+from .forms import ProductForm
+from django.contrib import messages
 
 class ProductsListView(ListView):
     model = Product
@@ -13,9 +15,9 @@ class ProductsListView(ListView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['product_category'] = ((Category.objects
-                .filter(parent_category__isnull=True)
-                .prefetch_related('subcategories'))
-                .annotate(product_count=Count('product')))
+                                        .filter(parent_category__isnull=True)
+                                        .prefetch_related('subcategories'))
+                                       .annotate(product_count=Count('product')))
         return context
 
 
@@ -31,6 +33,29 @@ class ProductDeleteView(DeleteView):
     model = Product
     template_name = 'products/product_delete.html'
     success_url = '/products/'
+
+
+def add_product(request):
+    categories = Category.objects.filter(parent_category=None)
+    product_status_choices = Product.PRODUCT_STATUS  # Product status choices
+
+    if request.method == 'POST':
+        form = ProductForm(request.POST, request.FILES)
+        if form.is_valid():
+            form.save()
+            messages.success(request, 'Product added successfully!')
+            return redirect('products:products_list')  # Adjust redirect if needed
+        else:
+            print(form.errors)  # Print form errors to debug issues
+    else:
+        form = ProductForm()
+
+    context = {
+        'form': form,
+        'product_category': categories,
+        'product_status_choices': product_status_choices
+    }
+    return render(request, 'products/add_product.html', context)
 
 
 def add_category(request):

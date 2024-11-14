@@ -120,7 +120,11 @@
 													{% endfor %}
 													</span>
 												</td>
-												<td>28</td>
+                                                {% if category.product > 0 %}
+												<td>{{ category.product.count }}</td>
+                                                {% else %}
+                                                <td>0</td>
+                                                {% endif %}
 												<td class="active">ACTIVE</td>
 												<td><span class="badge badge-success">Top</span></td>
 												<td>
